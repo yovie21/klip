@@ -1,16 +1,46 @@
-# klip
+# KLIP — Video Editor (CapCut Parity)
 
-A new Flutter project.
+Flutter-based mobile video editor dengan 99% feature parity ke CapCut 19.9.0.
+
+## Features
+
+### ✓ Core Features (MVP)
+- **Timeline Editor** — Multi-track timeline, segment trim/split/duplicate/reverse
+- **Transitions** — 18 FFmpeg xfade modes (fade, slide, zoom, circle, wipe, dll)
+- **Effects** — 14 filters (brightness, contrast, blur, grayscale, sepia, temperature, dll)
+- **Audio** — Multi-track audio mixing, volume control, fade in/out
+- **Text** — Text overlay, animations (entrance/exit timing), styling presets
+- **Overlays** — Image/text overlays dengan position, scale, opacity control
+- **Speed Ramp** — Per-segment speed control (0.25x - 4x)
+- **Color Grading** — HSL curves (hue, saturation, lightness, shadows, midtones, highlights)
+- **Keyframes** — Keyframe markers untuk animation (position, scale, opacity, rotation)
+- **Real-time Preview** — Live effect preview sebelum export
+- **Export** — Quality presets (720p-4K), codec selection (H.264/H.265/VP9)
+
+### ⚙️ Edit Tab Actions
+- Split segment di playhead
+- Delete segment
+- Duplicate segment
+- Reverse segment playback
+- Freeze frame (awal/akhir)
+- Mute/unmute audio
+- Speed adjustment
+- Cover thumbnail
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+Build APK:
+```bash
+flutter build apk --debug --split-per-abi
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Output: `build/app/outputs/flutter-apk/app-arm64-v8a-debug.apk` (untuk Android ARM64)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## License
+
+Private
