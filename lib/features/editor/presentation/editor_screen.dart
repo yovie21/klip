@@ -13,6 +13,7 @@ import '../domain/video_effect.dart';
 import '../domain/video_overlay.dart';
 import '../domain/color_grading.dart';
 import '../domain/keyframe.dart';
+import '../domain/green_screen_effect.dart';
 import 'transition_picker_sheet.dart';
 import 'keyframe_manager_sheet.dart';
 import 'effect_editor_sheet.dart';
@@ -22,6 +23,7 @@ import 'speed_ramp_picker_sheet.dart';
 import 'color_grading_sheet.dart';
 import 'text_animation_sheet.dart';
 import 'export_settings_sheet.dart';
+import 'green_screen_sheet.dart';
 import 'realtime_preview_widget.dart';
 
 class EditorScreen extends StatefulWidget {
@@ -48,6 +50,7 @@ class _EditorScreenState extends State<EditorScreen> {
   List<AudioTrack> _audioTracks = [];
   List<VideoOverlay> _overlays = [];
   ColorGrading _colorGrading = const ColorGrading();
+  GreenScreenEffect _greenScreen = const GreenScreenEffect();
   List<Keyframe> _keyframes = [];
   ExportQuality _exportQuality = ExportQuality.hd;
   ExportCodec _exportCodec = ExportCodec.h264;
@@ -578,6 +581,7 @@ class _EditorScreenState extends State<EditorScreen> {
             _mini('Speed', Icons.speed, _openSpeedRamp),
             _mini('Brightness', Icons.brightness_6, _brightnessPicker),
             _mini('Saturation', Icons.palette_outlined, _saturationPicker),
+            _mini('Green Screen', Icons.visibility_off, _openGreenScreenSheet),
           ]),
         'Overlay' =>
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -1398,6 +1402,19 @@ class _EditorScreenState extends State<EditorScreen> {
         colorGrading: _colorGrading,
         onSave: (grading) {
           setState(() => _colorGrading = grading);
+        },
+      ),
+    );
+  }
+
+  void _openGreenScreenSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => GreenScreenSheet(
+        effect: _greenScreen,
+        onChanged: (effect) {
+          setState(() => _greenScreen = effect);
         },
       ),
     );
