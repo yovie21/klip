@@ -176,17 +176,23 @@ class _EditorScreenState extends State<EditorScreen> {
                   onPressed: _addMedia, icon: const Icon(Icons.add)))
         ])),
         _playbackBar(),
-        _timeline(maxSeconds),
-        if (_selectedSegment < _segments.length)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            child: RealtimePreviewWidget(
-              videoPath: _segments[_selectedSegment].sourcePath ?? _video ?? '',
-              segment: _segments[_selectedSegment],
-              effects: _segments[_selectedSegment].effects,
-            ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(children: [
+              _timeline(maxSeconds),
+              if (_selectedSegment < _segments.length)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: RealtimePreviewWidget(
+                    videoPath: _segments[_selectedSegment].sourcePath ?? _video ?? '',
+                    segment: _segments[_selectedSegment],
+                    effects: _segments[_selectedSegment].effects,
+                  ),
+                ),
+              _selectedToolPanel(),
+            ]),
           ),
-        _selectedToolPanel(),
+        ),
         _toolBar(),
       ])),
     );
@@ -714,8 +720,8 @@ class _EditorScreenState extends State<EditorScreen> {
 
   Widget _toolBar() => SizedBox(
       height: 72,
-      child: ListView(
-          scrollDirection: Axis.horizontal,
+      child: Wrap(
+          spacing: 2,
           children: [
             'Edit',
             'Audio',
@@ -723,15 +729,12 @@ class _EditorScreenState extends State<EditorScreen> {
             'Effects',
             'Overlay',
             'Captions',
-            'Filters',
-            'Adjust',
-            'Stickers',
-            'Aspect ratio'
           ]
               .map((v) => InkWell(
                   onTap: () => setState(() => _tool = v),
                   child: SizedBox(
                       width: 68,
+                      height: 72,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
